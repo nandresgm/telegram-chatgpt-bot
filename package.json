@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "dotenv": "^16.0.3",
+    "express": "^5.1.0",
     "openai": "^4.97.0",
     "telegraf": "^4.16.3"
   }
