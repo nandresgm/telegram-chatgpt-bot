@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: english-listening-bot
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    branch: main  # Cambia "main" a la rama que uses
+    repo: https://github.com/nandresgm/telegram-chatgpt-bot.git # Reemplaza con tu URL de GitHub
+    autoDeploy: true
+    healthCheckPath: "/health"  # Asegúrate de tener una ruta para verificar que el servicio está corriendo
+    plan: free  # Puedes cambiar a otro plan si necesitas más recursos
