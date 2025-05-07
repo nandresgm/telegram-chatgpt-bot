@@ -1,14 +1,13 @@
 const { Telegraf } = require('telegraf');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 
 // Token de tu bot de Telegram
-const bot = new Telegraf('7598123994:AAHGo5-2Osb_4SzlgpbTDpu2VhQFhonM_3I');  // Sustituye con el token de BotFather
+const bot = new Telegraf('7598123994:AAHGo5-2Osb_4SzlgpbTDpu2VhQFhonM_3I'); // Reemplaza con tu token
 
 // Configura OpenAI
-const configuration = new Configuration({
-  apiKey: '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',  // Sustituye con tu clave API de OpenAI
+const openai = new OpenAI({
+  apiKey: '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', // Reemplaza con tu clave
 });
-const openai = new OpenAIApi(configuration);
 
 // Comando de inicio
 bot.start((ctx) => {
@@ -20,15 +19,12 @@ bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
 
   try {
-    // Llamada a la API de OpenAI (ChatGPT)
-    const response = await openai.createCompletion({
-      model: 'text-davinci-003',  // O el modelo que prefieras
-      prompt: userMessage,
-      max_tokens: 150,  // Limitar la longitud de la respuesta
+    const response = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo', // Puedes usar gpt-4 si tienes acceso
+      messages: [{ role: 'user', content: userMessage }],
     });
 
-    // Enviar la respuesta de ChatGPT al usuario
-    ctx.reply(response.data.choices[0].text.trim());
+    ctx.reply(response.choices[0].message.content.trim());
   } catch (error) {
     console.error(error);
     ctx.reply('Sorry, there was an error. Please try again later.');
