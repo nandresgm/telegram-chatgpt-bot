@@ -2,11 +2,11 @@ const { Telegraf } = require('telegraf');
 const OpenAI = require('openai');
 
 // Token de tu bot de Telegram
-const bot = new Telegraf('7598123994:AAHGo5-2Osb_4SzlgpbTDpu2VhQFhonM_3I'); // Reemplaza con tu token
+const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN); // Reemplaza con tu token
 
 // Configura OpenAI
 const openai = new OpenAI({
-  apiKey: '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', // Reemplaza con tu clave
+  apiKey: process.env.OPENAI_API_KEY, // Reemplaza con tu clave
 });
 
 // Comando de inicio
